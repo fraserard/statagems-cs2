@@ -18,17 +18,18 @@ import {
  */
 export const createTable = mysqlTableCreator((name) => `statagems-cs2_${name}`);
 
-export const posts = createTable(
-  "post",
+export const players = createTable(
+  "player",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    name: varchar("name", { length: 256 }),
+    steamId: bigint("steam_id", { mode: "number" }).unique().notNull(),
+
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt").onUpdateNow(),
   },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
+  (player) => ({
+    // constraints/indexes
   })
 );
