@@ -4,10 +4,9 @@
 import { sql } from "drizzle-orm";
 import {
   bigint,
-  index,
   mysqlTableCreator,
   timestamp,
-  varchar,
+  uniqueIndex,
 } from "drizzle-orm/mysql-core";
 
 /**
@@ -30,6 +29,6 @@ export const players = createTable(
     updatedAt: timestamp("updatedAt").onUpdateNow(),
   },
   (player) => ({
-    // constraints/indexes
+    steamIdIdx: uniqueIndex("steam_id_idx").on(player.steamId),
   })
 );

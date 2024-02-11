@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Link from "next/link";
 
 import { api } from "~/utils/api";
+import { env } from "~/env";
 import styles from "./index.module.css";
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
             Create <span className={styles.pinkSpan}>T3</span> App
           </h1>
           <div className={styles.cardRow}>
-          <a href={`http://localhost:3000/api/trpc/auth.login`}>Steam Login</a>
+          <a href={`${env.NEXT_PUBLIC_API_URL}/auth.login`}>Steam Login</a>
            {/* <button onClick={() => fetch("/api/login")}>Steam Login</button> */}
           </div>
           <p className={styles.showcaseText}>
