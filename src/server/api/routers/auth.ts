@@ -16,7 +16,9 @@ export const authRouter = createTRPCRouter({
     };
 
     const params = new URLSearchParams(OPENID_URL_PARAMS);
-    return ctx.res.redirect(`${OPENID_SERVER}?${params.toString()}`);
+
+    ctx.res.redirect(`${OPENID_SERVER}?${params.toString()}`);
+    ctx.res.end();
   }),
 
   steam: publicProcedure.query(async ({ ctx }) => {
