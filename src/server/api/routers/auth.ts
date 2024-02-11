@@ -20,6 +20,7 @@ export const authRouter = createTRPCRouter({
     ctx.res.setHeader("Location", `${OPENID_SERVER}?${params.toString()}`);
     // ctx.res.redirect(`${OPENID_SERVER}?${params.toString()}`);
     ctx.res.end();
+    return;
   }),
 
   steam: publicProcedure.query(async ({ ctx }) => {
