@@ -1,6 +1,6 @@
-import { env } from "~/env";
 import { type User } from "~/lib/session";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { getBaseUrl } from "~/utils/api";
 
 const OPENID_SERVER = "https://steamcommunity.com/openid/login" as const;
 const OPENID_URL_PARAMS = {
@@ -8,14 +8,12 @@ const OPENID_URL_PARAMS = {
   "openid.mode": "checkid_setup",
   "openid.identity": "http://specs.openid.net/auth/2.0/identifier_select",
   "openid.claimed_id": "http://specs.openid.net/auth/2.0/identifier_select",
-  "openid.return_to": `${env.NEXT_PUBLIC_API_URL}/auth.steam`,
-  "openid.realm": env.WEBSITE_URL,
+  "openid.return_to": `${getBaseUrl()}/api/trpc/auth.steam`,
+  "openid.realm": getBaseUrl(),
 } as const;
 
 export const authRouter = createTRPCRouter({
   login: publicProcedure.query(({ ctx }) => {
-    const OPENID_SERVER = "https://steamcommunity.com/openid/login";
-
     const params = new URLSearchParams(OPENID_URL_PARAMS);
     ctx.res.redirect(`${OPENID_SERVER}?${params.toString()}`);
   }),
@@ -47,7 +45,7 @@ export const authRouter = createTRPCRouter({
     };
     await ctx.session?.save();
 
-    ctx.res.redirect(`${env.WEBSITE_URL}`);
+    ctx.res.redirect(`${getBaseUrl()}`);
   }),
 
   user: publicProcedure.query(async ({ ctx }) => {
