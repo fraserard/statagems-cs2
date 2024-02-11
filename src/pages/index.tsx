@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import { useSession } from "~/contexts/SessionContext";
-import { api, getBaseUrl } from "~/utils/api";
+import { api } from "~/utils/api";
 import styles from "./index.module.css";
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
             Create <span className={styles.pinkSpan}>T3</span> App
           </h1>
           <div className={styles.cardRow}>
-            <a href={`${getBaseUrl()}/api/trpc/auth.login`}>Steam Login</a>
+            <a href={"/api/trpc/auth.login"}>Steam Login</a>
           </div>
           <p className={styles.showcaseText}>
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
