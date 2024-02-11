@@ -1,10 +1,18 @@
 import Head from "next/head";
 
-import { api } from "~/utils/api";
+import { useSession } from "~/contexts/SessionContext";
 import { env } from "~/env";
+import { api } from "~/utils/api";
 import styles from "./index.module.css";
 
 export default function Home() {
+  const { user } = useSession();
+
+  let msg = "signed out";
+  if (user) {
+    msg = "signed in";
+  }
+
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
   return (
@@ -20,11 +28,11 @@ export default function Home() {
             Create <span className={styles.pinkSpan}>T3</span> App
           </h1>
           <div className={styles.cardRow}>
-          <a href={`${env.NEXT_PUBLIC_API_URL}/auth.login`}>Steam Login</a>
-           {/* <button onClick={() => fetch("/api/login")}>Steam Login</button> */}
+            <a href={`${env.NEXT_PUBLIC_API_URL}/auth.login`}>Steam Login</a>
           </div>
           <p className={styles.showcaseText}>
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
+            {msg}
           </p>
         </div>
       </main>

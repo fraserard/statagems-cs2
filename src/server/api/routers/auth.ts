@@ -1,5 +1,6 @@
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { env } from "~/env";
+import { type User } from "~/lib/session";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 const OPENID_SERVER = "https://steamcommunity.com/openid/login" as const;
 const OPENID_URL_PARAMS = {
@@ -32,6 +33,7 @@ export const authRouter = createTRPCRouter({
     );
 
     if (!(await authCheckResponse.text()).includes("is_valid:true")) {
+      // authentication failed
       console.error("steam openId error");
     }
 
@@ -46,5 +48,18 @@ export const authRouter = createTRPCRouter({
     await ctx.session?.save();
 
     ctx.res.redirect(`${env.WEBSITE_URL}`);
+  }),
+
+  user: publicProcedure.query(async ({ ctx }) => {
+    if (!ctx.session?.user) {
+      return { user: undefined };
+    }
+
+    return {
+      user: {
+        id: ctx.session.user.id,
+        avatarUrl: ctx.session.user.avatarUrl,
+      } satisfies User,
+    };
   }),
 });

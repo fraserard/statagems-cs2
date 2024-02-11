@@ -3,7 +3,7 @@ import type { SessionOptions } from "iron-session";
 
 import { env } from "~/env";
 
-export type UserSession = {
+export type User = {
   id: string;
   avatarUrl: string;
 };
@@ -19,6 +19,6 @@ export const sessionOptions: SessionOptions = {
 // This is where we specify the typings of req.session.*
 declare module "iron-session" {
   interface IronSessionData {
-    user: UserSession;
+    user: User;
   }
 }
