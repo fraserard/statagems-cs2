@@ -27,7 +27,7 @@ export default function Home() {
             Create <span className={styles.pinkSpan}>T3</span> App
           </h1>
           <div className={styles.cardRow}>
-            <a href={"/api/trpc/auth.login"}>Steam Login</a>
+            <a href={"/api/login"}>Steam Login</a>
           </div>
           <p className={styles.showcaseText}>
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
