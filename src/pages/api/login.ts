@@ -9,7 +9,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     "openid.mode": "checkid_setup",
     "openid.identity": "http://specs.openid.net/auth/2.0/identifier_select",
     "openid.claimed_id": "http://specs.openid.net/auth/2.0/identifier_select",
-    "openid.return_to": `${getBaseUrl()}/api/trpc/auth.steam`,
+    "openid.return_to": `${getBaseUrl()}/api/auth`,
     "openid.realm": getBaseUrl(),
   };
 
