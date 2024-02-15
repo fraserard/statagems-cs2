@@ -7,6 +7,7 @@
     "build": "next build",
     "db:push": "drizzle-kit push:mysql",
     "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx ./src/server/db/seed.ts",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
@@ -34,10 +35,12 @@
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
+    "dotenv": "^16.4.4",
     "drizzle-kit": "^0.20.9",
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.4",
     "mysql2": "^3.6.1",
+    "tsx": "^4.7.1",
     "typescript": "^5.1.6"
   },
   "ct3aMetadata": {
