@@ -29,8 +29,12 @@ export const createTable = mysqlTableCreator((name) => `statagems-cs2_${name}`);
 export const player = createTable("player", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
   username: varchar("username", { length: 32 }).notNull(),
-  role: mysqlEnum("role", ["admin", "referee", "player", "removed"]),
-  steamId: bigint("steam_id", { mode: "number" }).unique().notNull(),
+  role: mysqlEnum("role", ["admin", "referee", "player", "removed"])
+    .default("player")
+    .notNull(),
+  steamId: bigint("steam_id", { mode: "bigint", unsigned: true })
+    .unique()
+    .notNull(),
   steamUsername: varchar("steam_username", { length: 32 }).notNull(),
   steamAvatarHash: varchar("steam_avatar_hash", { length: 64 }).notNull(),
   steamLastFetched: datetime("steam_last_fetched")
