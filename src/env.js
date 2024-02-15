@@ -18,6 +18,8 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("development"),
     COOKIE_SECRET: z.string(),
+    ADMIN_STEAM_ID: z.string(),
+    STEAM_API_KEY: z.string(),
   },
 
   /**
@@ -35,6 +37,8 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     COOKIE_SECRET: process.env.COOKIE_SECRET,
+    ADMIN_STEAM_ID: process.env.ADMIN_STEAM_ID,
+    STEAM_API_KEY: process.env.STEAM_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
